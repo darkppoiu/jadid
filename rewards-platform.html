@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AppQuest — Discover Apps, Earn Rewards</title>
+
+<!-- SEO & Social Meta -->
+<meta name="description" content="Join thousands of beta testers discovering trending apps and tools. Complete tasks, earn XP, and climb the leaderboard on AppQuest.">
+<meta property="og:title" content="AppQuest — Discover Apps &amp; Earn Rewards">
+<meta property="og:description" content="Test new apps, earn XP points, and compete with thousands of testers worldwide. Join AppQuest free today.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AppQuest — Discover Apps &amp; Earn Rewards">
+<meta name="twitter:description" content="Test new apps, earn XP points, and climb the global leaderboard.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --bg:       #070b14;
+  --bg-s:     #0c1220;
+  --card:     rgba(255,255,255,0.042);
+  --card-hv:  rgba(255,255,255,0.072);
+  --bdr:      rgba(255,255,255,0.07);
+  --bdr-b:    rgba(255,255,255,0.14);
+  --bdr-c:    rgba(0,229,255,0.28);
+  --cyan:     #00e5ff;
+  --violet:   #7c3aed;
+  --emerald:  #10d48a;
+  --amber:    #f59e0b;
+  --rose:     #f43f5e;
+  --indigo:   #818cf8;
+  --t1:       #f1f5f9;
+  --t2:       #94a3b8;
+  --t3:       #475569;
+  --gc:       rgba(0,229,255,0.13);
+  --gv:       rgba(124,58,237,0.17);
+  --rc:       16px;
+  --rb:       10px;
+  --fh:       'Syne', sans-serif;
+  --fb:       'DM Sans', sans-serif;
+  --ease:     cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--violet);border-radius:3px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:120;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 48px;
+  background:rgba(7,11,20,.9);backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--bdr);
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.55)}
+.nav-logo{
+  font-family:var(--fh);font-size:1.35rem;font-weight:800;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:-.02em;user-select:none;
+}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--t2);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--t1)}
+.nav-cta{
+  background:linear-gradient(135deg,var(--violet),#a855f7);
+  color:#fff;border:none;padding:9px 20px;border-radius:var(--rb);
+  font-family:var(--fb);font-size:.86rem;font-weight:600;
+  cursor:pointer;transition:opacity .2s,transform .2s;
+}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
+@media(max-width:768px){nav{padding:13px 18px}.nav-links{display:none}}
+
+/* ── HERO ── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;
+  background:linear-gradient(145deg,#0d1424,#0a0f1e 50%,#0d0b1a);
+  overflow:hidden;
+}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;will-change:transform}
+.o1{width:560px;height:560px;background:var(--gc);top:-180px;left:-80px;animation:drift 14s ease-in-out infinite alternate}
+.o2{width:460px;height:460px;background:var(--gv);bottom:-130px;right:-60px;animation:drift 18s ease-in-out infinite alternate-reverse}
+.o3{width:280px;height:280px;background:rgba(16,212,138,.06);top:45%;left:50%;transform:translate(-50%,-50%)}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(28px,18px)}}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,229,255,.09);border:1px solid rgba(0,229,255,.24);
+  border-radius:999px;padding:6px 16px;font-size:.75rem;font-weight:700;
+  color:var(--cyan);margin-bottom:22px;letter-spacing:.06em;text-transform:uppercase;
+  animation:fD .55s var(--ease) both;
+}
+.dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{
+  font-family:var(--fh);font-size:clamp(2.3rem,6vw,4.8rem);
+  font-weight:800;line-height:1.05;letter-spacing:-.03em;max-width:800px;
+  animation:fD .65s .1s var(--ease) both;
+}
+.hl{
+  background:linear-gradient(90deg,var(--cyan),var(--indigo) 50%,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% auto;animation:gs 4s linear infinite;
+}
+@keyframes gs{from{background-position:0%}to{background-position:200%}}
+.hero p{
+  max-width:510px;color:var(--t2);font-size:1.07rem;line-height:1.72;
+  margin:18px auto 0;animation:fD .65s .2s var(--ease) both;
+}
+.hero-actions{
+  display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;justify-content:center;
+  animation:fD .65s .3s var(--ease) both;
+}
+.hero-stats{
+  display:flex;gap:40px;margin-top:60px;flex-wrap:wrap;justify-content:center;
+  animation:fD .65s .4s var(--ease) both;
+}
+.si{text-align:center}
+.sn{font-family:var(--fh);font-size:2rem;font-weight:800;color:var(--cyan)}
+.sl{font-size:.74rem;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.sd{width:1px;background:var(--bdr);align-self:stretch}
+@media(max-width:560px){.sd{display:none}}
+
+/* ── BUTTONS ── */
+.btn-p{
+  background:linear-gradient(135deg,var(--cyan),#0891b2);
+  color:#000;font-weight:700;font-size:.97rem;padding:14px 30px;
+  border:none;border-radius:var(--rb);cursor:pointer;font-family:var(--fb);
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 0 28px rgba(0,229,255,.28);white-space:nowrap;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(0,229,255,.44)}
+.btn-p:active{transform:scale(.98)}
+.btn-g{
+  background:transparent;color:var(--t1);font-weight:500;font-size:.97rem;
+  padding:14px 30px;border:1px solid var(--bdr-b);border-radius:var(--rb);
+  cursor:pointer;font-family:var(--fb);transition:background .2s,border-color .2s;
+}
+.btn-g:hover{background:var(--card);border-color:var(--cyan)}
+
+/* ── SECTIONS ── */
+.sec{padding:96px 24px;position:relative}
+.sec-lbl{
+  text-align:center;font-size:.71rem;font-weight:700;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;
+}
+.sec-ttl{
+  font-family:var(--fh);font-size:clamp(1.7rem,4vw,2.85rem);font-weight:800;
+  text-align:center;letter-spacing:-.025em;margin-bottom:13px;
+}
+.sec-sub{
+  text-align:center;color:var(--t2);max-width:450px;margin:0 auto 54px;
+  font-size:.92rem;line-height:1.7;
+}
+.sec-div{
+  width:50px;height:3px;border-radius:999px;margin:0 auto 13px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+}
+
+/* ── STEPS ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:20px;max-width:960px;margin:0 auto}
+.step{
+  background:var(--card);border:1px solid var(--bdr);border-radius:var(--rc);
+  padding:32px 24px;position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s,box-shadow .3s;backdrop-filter:blur(12px);
+}
+.step::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,229,255,.04),transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.step:hover{border-color:var(--bdr-c);transform:translateY(-5px);box-shadow:0 22px 56px rgba(0,0,0,.4)}
+.step:hover::after{opacity:1}
+.step-n{
+  font-family:var(--fh);font-size:3rem;font-weight:800;
+  color:rgba(0,229,255,.06);position:absolute;top:13px;right:18px;line-height:1;
+}
+.step-ic{
+  width:48px;height:48px;border-radius:13px;display:flex;align-items:center;
+  justify-content:center;font-size:1.4rem;margin-bottom:16px;
+}
+.ic-c{background:rgba(0,229,255,.1)}
+.ic-v{background:rgba(124,58,237,.1)}
+.ic-e{background:rgba(16,212,138,.1)}
+.step h3{font-family:var(--fh);font-size:1.08rem;font-weight:700;margin-bottom:8px}
+.step p{color:var(--t2);font-size:.87rem;line-height:1.64}
+
+/* ── URGENCY ── */
+.urg{
+  background:linear-gradient(90deg,rgba(244,63,94,.12),rgba(245,158,11,.11));
+  border:1px solid rgba(244,63,94,.27);border-radius:10px;
+  padding:11px 18px;display:flex;align-items:center;justify-content:center;
+  gap:10px;max-width:1200px;margin:0 auto 28px;
+  font-size:.87rem;font-weight:500;flex-wrap:wrap;row-gap:6px;
+}
+.u-dot{width:7px;height:7px;background:var(--rose);border-radius:50%;animation:pulse 1.4s infinite;flex-shrink:0}
+.u-n{font-weight:700;color:var(--amber)}
+
+/* ── TASKS SECTION ── */
+.tasks-sec{padding:56px 24px 92px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:36px}
+.flt{
+  background:var(--card);border:1px solid var(--bdr);color:var(--t2);
+  padding:7px 16px;border-radius:999px;font-size:.81rem;font-weight:500;
+  cursor:pointer;font-family:var(--fb);transition:all .2s;white-space:nowrap;
+}
+.flt.active,.flt:hover{background:rgba(0,229,255,.09);border-color:var(--cyan);color:var(--cyan)}
+
+/* ── OFFER GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:18px;max-width:1200px;margin:0 auto}
+.card{
+  background:var(--card);border:1px solid var(--bdr);border-radius:var(--rc);
+  padding:22px;cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color .24s var(--ease),transform .24s var(--ease),box-shadow .24s var(--ease);
+  backdrop-filter:blur(10px);animation:fU .4s var(--ease) both;will-change:transform;
+}
+.card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gc),transparent 55%);
+  opacity:0;transition:opacity .28s;
+}
+.card:hover{border-color:rgba(0,229,255,.3);transform:translateY(-5px);box-shadow:0 20px 56px rgba(0,0,0,.44)}
+.card:hover::before{opacity:1}
+.card:active{transform:scale(.979)}
+.c-hdr{display:flex;align-items:flex-start;gap:12px;margin-bottom:11px}
+.c-icon{
+  width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:1.3rem;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.c-name{font-family:var(--fh);font-size:.94rem;font-weight:700;line-height:1.3;margin-bottom:4px}
+.c-cat{
+  font-size:.67rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:2px 8px;border-radius:999px;background:rgba(124,58,237,.14);color:#a78bfa;display:inline-block;
+}
+.c-desc{color:var(--t2);font-size:.84rem;line-height:1.6;margin-bottom:14px}
+.c-inds{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap}
+.ind{font-size:.69rem;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid}
+.d-e{background:rgba(16,212,138,.09);border-color:rgba(16,212,138,.24);color:var(--emerald)}
+.d-m{background:rgba(245,158,11,.09);border-color:rgba(245,158,11,.24);color:var(--amber)}
+.d-h{background:rgba(244,63,94,.09);border-color:rgba(244,63,94,.24);color:var(--rose)}
+.cr{background:rgba(129,140,248,.09);border-color:rgba(129,140,248,.24);color:var(--indigo)}
+.c-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:5px}
+.c-time{display:flex;align-items:center;gap:5px;color:var(--t3);font-size:.78rem}
+.c-xp{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(16,212,138,.1);border:1px solid rgba(16,212,138,.2);
+  border-radius:999px;padding:4px 11px;font-size:.84rem;font-weight:700;color:var(--emerald);
+}
+.btn-try{
+  width:100%;background:linear-gradient(135deg,var(--violet),#a855f7);
+  color:#fff;border:none;padding:11px;border-radius:var(--rb);
+  font-family:var(--fb);font-size:.88rem;font-weight:600;
+  cursor:pointer;transition:opacity .2s,transform .2s;position:relative;z-index:1;
+}
+.btn-try:hover{opacity:.88;transform:scale(1.012)}
+
+/* ── SKELETON ── */
+.skel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:18px;max-width:1200px;margin:0 auto}
+.skel{
+  background:var(--card);border:1px solid var(--bdr);border-radius:var(--rc);
+  height:265px;position:relative;overflow:hidden;
+}
+.skel::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);
+  animation:shim 1.55s infinite;
+}
+
+/* ── LOAD MORE ── */
+.lm-wrap{text-align:center;margin-top:34px}
+.btn-lm{
+  background:var(--card);border:1px solid var(--bdr-b);color:var(--t1);
+  padding:12px 32px;border-radius:var(--rb);font-family:var(--fb);font-size:.92rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+}
+.btn-lm:hover{background:var(--card-hv);border-color:var(--cyan);color:var(--cyan)}
+
+/* ── BONUS ── */
+.bonus-sec{padding:0 24px 78px}
+.bonus-card{
+  max-width:1200px;margin:0 auto;
+  background:linear-gradient(135deg,rgba(124,58,237,.17),rgba(0,229,255,.06));
+  border:1px solid rgba(124,58,237,.27);border-radius:20px;
+  padding:42px 48px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.bonus-card::before{
+  content:'⚡';position:absolute;font-size:17rem;right:-25px;top:-45px;
+  opacity:.022;pointer-events:none;line-height:1;
+}
+.b-tag{
+  display:inline-block;background:var(--amber);color:#000;
+  font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:999px;margin-bottom:9px;
+}
+.bonus-card h2{font-family:var(--fh);font-size:1.65rem;font-weight:800;margin-bottom:7px;letter-spacing:-.02em}
+.bonus-card p{color:var(--t2);font-size:.91rem;line-height:1.64;max-width:390px}
+.b-right{margin-left:auto;text-align:center}
+.b-pts{font-family:var(--fh);font-size:3.1rem;font-weight:800;color:var(--amber);line-height:1}
+.b-lbl{color:var(--t2);font-size:.8rem;margin-top:3px;margin-bottom:13px}
+@media(max-width:600px){.bonus-card{padding:26px 20px}.b-right{margin-left:0}}
+
+/* ── LEADERBOARD ── */
+.lb-wrap{max-width:570px;margin:0 auto;background:var(--card);border:1px solid var(--bdr);border-radius:20px;overflow:hidden}
+.lb-hdr{padding:20px 24px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:9px}
+.lb-hdr h3{font-family:var(--fh);font-weight:700;font-size:1.03rem}
+.lb-live{
+  font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--emerald);background:rgba(16,212,138,.1);padding:3px 9px;border-radius:999px;margin-left:auto;
+}
+.lb-row{
+  display:flex;align-items:center;gap:13px;padding:13px 24px;
+  border-bottom:1px solid var(--bdr);transition:background .2s;
+}
+.lb-row:last-child{border-bottom:none}
+.lb-row:hover{background:var(--card-hv)}
+.lb-rk{font-family:var(--fh);font-size:.98rem;font-weight:800;width:26px;text-align:center;flex-shrink:0}
+.rk1{color:#ffd700}.rk2{color:#c0c0c0}.rk3{color:#cd7f32}
+.lb-av{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.84rem;
+}
+.lb-nm{font-weight:500;flex:1;font-size:.88rem}
+.lb-xp{font-family:var(--fh);font-weight:700;color:var(--emerald);font-size:.88rem}
+
+/* ── ACTIVITY ── */
+.act-widget{position:fixed;bottom:22px;left:22px;z-index:110;max-width:305px;pointer-events:none;display:flex;flex-direction:column;gap:7px}
+.act-toast{
+  background:rgba(7,11,20,.94);backdrop-filter:blur(20px);
+  border:1px solid var(--bdr-b);border-radius:12px;
+  padding:10px 13px;display:flex;align-items:center;gap:10px;
+  animation:sI .32s var(--ease);transition:opacity .4s,transform .4s;
+  box-shadow:0 8px 26px rgba(0,0,0,.5);
+}
+.act-toast.out{opacity:0;transform:translateX(-16px)}
+.act-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0}
+.act-tx{font-size:.78rem;line-height:1.44;color:var(--t2)}
+.act-tx strong{color:var(--t1);font-weight:600}
+.act-xp{font-size:.74rem;font-weight:700;color:var(--emerald);white-space:nowrap}
+
+/* ── MODALS ── */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(7px);
+  z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;pointer-events:none;transition:opacity .27s var(--ease);
+}
+.overlay.on{opacity:1;pointer-events:all}
+.modal{
+  background:#0d1424;border:1px solid var(--bdr-b);border-radius:20px;
+  padding:36px;max-width:475px;width:100%;
+  transform:translateY(16px) scale(.98);
+  transition:transform .27s var(--ease);
+  position:relative;max-height:90vh;overflow-y:auto;
+}
+.overlay.on .modal{transform:translateY(0) scale(1)}
+.m-close{
+  position:absolute;top:13px;right:13px;
+  background:var(--card);border:1px solid var(--bdr);color:var(--t2);
+  width:29px;height:29px;border-radius:50%;cursor:pointer;
+  font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;line-height:1;
+}
+.m-close:hover{background:var(--card-hv);color:var(--t1)}
+
+/* Email modal */
+.em-ic{text-align:center;font-size:3rem;margin-bottom:13px}
+.em-h{font-family:var(--fh);font-size:1.5rem;font-weight:800;text-align:center;margin-bottom:6px;letter-spacing:-.02em}
+.em-sub{text-align:center;color:var(--t2);font-size:.87rem;margin-bottom:14px;line-height:1.6}
+.em-perks{display:flex;gap:14px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.em-pk{display:flex;align-items:center;gap:5px;font-size:.77rem;color:var(--t2)}
+.em-form{display:flex;flex-direction:column;gap:11px}
+.em-inp{
+  background:rgba(255,255,255,.05);border:1px solid var(--bdr-b);
+  border-radius:var(--rb);padding:12px 16px;color:var(--t1);
+  font-family:var(--fb);font-size:.92rem;outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.em-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
+.em-inp::placeholder{color:var(--t3)}
+.em-inp.err{border-color:var(--rose);animation:shake .3s}
+.btn-unlock{
+  background:linear-gradient(135deg,var(--cyan),#0891b2);color:#000;
+  font-family:var(--fb);font-weight:700;font-size:.96rem;padding:13px;
+  border:none;border-radius:var(--rb);cursor:pointer;transition:opacity .2s,transform .2s;
+}
+.btn-unlock:hover{opacity:.88;transform:scale(1.01)}
+.em-trust{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--t3);font-size:.74rem;margin-top:5px}
+
+/* Offer modal */
+.om-hdr{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.om-ic{width:56px;height:56px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.om-nm{font-family:var(--fh);font-size:1.2rem;font-weight:800;margin-bottom:5px;letter-spacing:-.02em}
+.om-xp{display:inline-flex;align-items:center;gap:5px;background:rgba(16,212,138,.1);border:1px solid rgba(16,212,138,.2);border-radius:999px;padding:3px 10px;font-size:.8rem;font-weight:700;color:var(--emerald)}
+.om-ds{color:var(--t2);font-size:.87rem;line-height:1.62;margin-bottom:4px}
+.om-steps{margin:18px 0;display:flex;flex-direction:column;gap:13px}
+.om-step{display:flex;align-items:flex-start;gap:13px}
+.om-num{
+  width:29px;height:29px;border-radius:50%;flex-shrink:0;
+  background:rgba(0,229,255,.09);border:1px solid rgba(0,229,255,.27);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;font-weight:700;color:var(--cyan);
+}
+.om-body h4{font-weight:600;margin-bottom:2px;font-size:.88rem}
+.om-body p{color:var(--t2);font-size:.83rem;line-height:1.54}
+.btn-start{
+  width:100%;background:linear-gradient(135deg,var(--emerald),#059669);color:#000;
+  font-family:var(--fb);font-weight:700;font-size:.96rem;padding:13px;
+  border:none;border-radius:var(--rb);cursor:pointer;transition:opacity .2s,transform .2s;
+  margin-top:7px;position:relative;overflow:hidden;
+}
+.btn-start:hover{opacity:.88;transform:scale(1.01)}
+.btn-start.loading .lbl{display:none}
+.btn-start .spin{
+  display:none;width:17px;height:17px;border:2px solid rgba(0,0,0,.3);
+  border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto;
+}
+.btn-start.loading .spin{display:block}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--bdr);padding:34px 48px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+.ft-logo{
+  font-family:var(--fh);font-size:1.12rem;font-weight:800;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+footer p{color:var(--t3);font-size:.79rem}
+@media(max-width:560px){footer{flex-direction:column;text-align:center;padding:26px 18px}}
+
+/* ── ERROR ── */
+.err-st{text-align:center;padding:52px 20px;color:var(--t2)}
+.err-st .ei{font-size:2.7rem;margin-bottom:12px}
+.err-st p{margin-bottom:16px}
+
+/* ── KEYFRAMES ── */
+@keyframes fD   {from{opacity:0;transform:translateY(-13px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fU   {from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)}}
+@keyframes sI   {from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes shim {from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+@keyframes spin {to{transform:rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nav-logo">App<span style="-webkit-text-fill-color:var(--t1)">Quest</span></div>
+  <div class="nav-links">
+    <a href="#hiw">How it Works</a>
+    <a href="#tasks">Tasks</a>
+    <a href="#lb">Leaderboard</a>
+  </div>
+  <button class="nav-cta" onclick="showEmail()">Get Started Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="hero-badge"><span class="dot"></span>Beta Testing Platform — Now Live</div>
+  <h1>Discover New Apps &amp;<br><span class="hl">Unlock Rewards</span></h1>
+  <p>Join thousands of users testing trending apps and tools every day. Complete tasks, earn XP, and climb the global leaderboard.</p>
+  <div class="hero-actions">
+    <button class="btn-p" onclick="showEmail()">🚀 Explore Available Tasks</button>
+    <button class="btn-g" onclick="goto('hiw')">How it works ↓</button>
+  </div>
+  <div class="hero-stats">
+    <div class="si"><div class="sn" id="st-u">0</div><div class="sl">Users Active Today</div></div>
+    <div class="sd"></div>
+    <div class="si"><div class="sn" id="st-r">0</div><div class="sl">XP Unlocked Today</div></div>
+    <div class="sd"></div>
+    <div class="si"><div class="sn" id="st-a">0</div><div class="sl">Apps Tested Today</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="hiw">
+  <div class="sec-div"></div>
+  <div class="sec-lbl">Simple Process</div>
+  <h2 class="sec-ttl">How AppQuest Works</h2>
+  <p class="sec-sub">Three easy steps to start earning XP for testing apps.</p>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div class="step-ic ic-c">🔍</div><h3>Discover Apps</h3><p>Browse our curated list of trending apps and tools. New tasks are added every day across dozens of categories.</p></div>
+    <div class="step"><div class="step-n">02</div><div class="step-ic ic-v">📱</div><h3>Try the App</h3><p>Sign up or install the app and explore its features. Most tasks take just 2–5 minutes to complete.</p></div>
+    <div class="step"><div class="step-n">03</div><div class="step-ic ic-e">⭐</div><h3>Earn XP Points</h3><p>Unlock XP instantly after completing a task. Climb the leaderboard and unlock multiplier bonuses.</p></div>
+  </div>
+</section>
+
+<!-- TASK WALL -->
+<section class="tasks-sec" id="tasks">
+  <div class="sec-div"></div>
+  <div class="sec-lbl">Live Task Board</div>
+  <h2 class="sec-ttl">Available Testing Tasks</h2>
+  <p class="sec-sub">Fresh apps waiting to be tested. Claim your slot before they fill up.</p>
+
+  <div class="urg">
+    <span class="u-dot"></span>
+    <span>Only <span class="u-n" id="slot-n">--</span> testing slots remaining today</span>
+    <span style="color:var(--t3)">·</span>
+    <span style="color:var(--t3);font-size:.8rem">⏰ Resets at midnight</span>
+  </div>
+
+  <div class="filter-bar" id="fbar">
+    <button class="flt active" data-cat="all">All Tasks</button>
+  </div>
+
+  <div class="skel-grid" id="skel-grid">
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+  </div>
+  <div class="grid hidden" id="offers-grid"></div>
+  <div class="err-st hidden" id="err-st">
+    <div class="ei">⚠️</div><p>Unable to load tasks. Please try again.</p>
+    <button class="btn-g" onclick="loadOffers()">Retry</button>
+  </div>
+  <div class="lm-wrap hidden" id="lm-wrap">
+    <button class="btn-lm" id="btn-lm">Load More Offers ↓</button>
+  </div>
+</section>
+
+<!-- DAILY BONUS -->
+<section class="bonus-sec">
+  <div class="bonus-card">
+    <div>
+      <div class="b-tag">🔥 Daily Bonus</div>
+      <h2>Featured Task of the Day</h2>
+      <p id="b-desc">Loading today's featured app…</p>
+    </div>
+    <div class="b-right">
+      <div class="b-pts" id="b-pts">—</div>
+      <div class="b-lbl">XP Points</div>
+      <button class="btn-p" id="b-btn">Claim Bonus →</button>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD -->
+<section class="sec" id="lb">
+  <div class="sec-div"></div>
+  <div class="sec-lbl">Community</div>
+  <h2 class="sec-ttl">Top Testers Today</h2>
+  <p class="sec-sub">Real-time rankings based on tasks completed today.</p>
+  <div class="lb-wrap">
+    <div class="lb-hdr"><span>🏆</span><h3>Global Leaderboard</h3><span class="lb-live">● Live</span></div>
+    <div id="lb-rows"></div>
+  </div>
+</section>
+
+<!-- ACTIVITY WIDGET -->
+<div class="act-widget" id="act-widget"></div>
+
+<!-- EMAIL MODAL -->
+<div class="overlay" id="email-overlay">
+  <div class="modal">
+    <div class="em-ic">🔐</div>
+    <h2 class="em-h">Unlock the Testing Dashboard</h2>
+    <p class="em-sub">Enter your email to access all tasks and start earning XP instantly. Free forever.</p>
+    <div class="em-perks">
+      <span class="em-pk">✅ Free to join</span>
+      <span class="em-pk">⚡ Instant access</span>
+      <span class="em-pk">🎁 Bonus XP on signup</span>
+    </div>
+    <div class="em-form">
+      <input class="em-inp" type="email" id="em-inp" placeholder="your@email.com" autocomplete="email">
+      <button class="btn-unlock" onclick="submitEmail()">🚀 Unlock Tasks — It's Free</button>
+    </div>
+    <div class="em-trust">🔒 No spam ever · Unsubscribe anytime</div>
+  </div>
+</div>
+
+<!-- OFFER MODAL -->
+<div class="overlay" id="offer-overlay">
+  <div class="modal">
+    <button class="m-close" onclick="closeOffer()">✕</button>
+    <div class="om-hdr">
+      <div class="om-ic" id="om-ic">📱</div>
+      <div>
+        <div class="om-nm" id="om-nm">App Name</div>
+        <div class="om-xp" id="om-xp">⭐ 0 XP</div>
+      </div>
+    </div>
+    <p class="om-ds" id="om-ds"></p>
+    <div class="om-steps">
+      <div class="om-step"><div class="om-num">1</div><div class="om-body"><h4>Install or Open the App</h4><p>Download or visit the link — takes under a minute to get started.</p></div></div>
+      <div class="om-step"><div class="om-num">2</div><div class="om-body"><h4>Create a Free Account</h4><p>Sign up with your email — no credit card required for most tasks.</p></div></div>
+      <div class="om-step"><div class="om-num">3</div><div class="om-body"><h4>Explore the Features</h4><p>Spend a few minutes using the app. Your XP will be credited automatically.</p></div></div>
+    </div>
+    <button class="btn-start" id="btn-start">
+      <span class="lbl">✅ Start Testing — Earn XP Now</span>
+      <div class="spin"></div>
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">AppQuest</div>
+  <p>© 2025 AppQuest. Discover, test &amp; earn rewards.</p>
+  <p>Terms · Privacy</p>
+</footer>
+
+<script>
+/* ═══════════════════════
+   CONFIG
+═══════════════════════ */
+const API  = 'https://d5b3uz3fo8hn3.cloudfront.net/public/offers/feed.php?user_id=584180&api_key=ad55fcf79b3953d539938be8015c3900&s1=&s2=';
+const PS   = 12; // page size
+
+/* ═══════════════════════
+   STATE
+═══════════════════════ */
+let all     = [];   // normalised offers
+let filtered= [];
+let shown   = 0;
+let filter  = 'all';
+let unlocked= false;
+let curUrl  = '';
+
+/* ═══════════════════════
+   1. POINT SYSTEM
+   xp = payout * 90 + random(5..35)
+═══════════════════════ */
+function xpFor(payout){
+  const base = Math.round(parseFloat(payout||0)*90);
+  return base + 5 + Math.floor(Math.random()*31);
+}
+
+/* ═══════════════════════
+   CATEGORY CONFIG
+═══════════════════════ */
+const CATS={
+  finance:  {ic:'💰',gr:'linear-gradient(135deg,#b45309,#f59e0b)'},
+  gaming:   {ic:'🎮',gr:'linear-gradient(135deg,#7c3aed,#a855f7)'},
+  lifestyle:{ic:'🌿',gr:'linear-gradient(135deg,#047857,#10d48a)'},
+  health:   {ic:'❤️',gr:'linear-gradient(135deg,#9f1239,#f43f5e)'},
+  education:{ic:'📚',gr:'linear-gradient(135deg,#1d4ed8,#60a5fa)'},
+  travel:   {ic:'✈️',gr:'linear-gradient(135deg,#0e7490,#00e5ff)'},
+  shopping: {ic:'🛍️',gr:'linear-gradient(135deg,#9d174d,#ec4899)'},
+  utilities:{ic:'🔧',gr:'linear-gradient(135deg,#334155,#64748b)'},
+  vpn:      {ic:'🔒',gr:'linear-gradient(135deg,#5b21b6,#8b5cf6)'},
+  dating:   {ic:'💝',gr:'linear-gradient(135deg,#be123c,#f43f5e)'},
+  crypto:   {ic:'₿', gr:'linear-gradient(135deg,#92400e,#f59e0b)'},
+  surveys:  {ic:'📊',gr:'linear-gradient(135deg,#0369a1,#0ea5e9)'},
+  default:  {ic:'⚡',gr:'linear-gradient(135deg,#0891b2,#00e5ff)'},
+};
+const GRADS=Object.values(CATS).map(c=>c.gr);
+function catKey(n){const s=String(n).toLowerCase();for(const k of Object.keys(CATS))if(s.includes(k))return k;return'default'}
+function catIc(n){return CATS[catKey(n)].ic}
+function catGr(seed){return GRADS[hsh(seed)%GRADS.length]}
+function hsh(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h)+s.charCodeAt(i);return Math.abs(h)}
+
+/* ═══════════════════════
+   7. QUALITY INDICATORS
+═══════════════════════ */
+function diff(seed){const v=hsh(seed+'d')%10;return v<6?{l:'Easy',c:'d-e'}:v<9?{l:'Medium',c:'d-m'}:{l:'Hard',c:'d-h'}}
+function comp(seed){return 70+(hsh(seed+'c')%26)}
+
+/* ═══════════════════════
+   1. API FETCH — JSON → XML
+═══════════════════════ */
+async function loadOffers(){
+  showSkel();
+  try{
+    const res  = await fetch(API);
+    const text = await res.text();
+    let raw    = [];
+
+    /* Try JSON first */
+    try{
+      const d=JSON.parse(text);
+      if(Array.isArray(d)) raw=d;
+      else for(const v of Object.values(d)){if(Array.isArray(v)){raw=v;break}}
+    }catch(_){
+      /* XML fallback */
+      try{
+        const doc=new DOMParser().parseFromString(text,'text/xml');
+        doc.querySelectorAll('offer').forEach(n=>{
+          const g=t=>n.querySelector(t)?.textContent||'';
+          raw.push({name:g('name')||g('title'),description:g('description')||g('desc'),
+            payout:g('payout')||g('revenue'),tracking_url:g('tracking_url')||g('link')||g('url')});
+        });
+      }catch(__){/*ignore*/}
+    }
+
+    raw=raw.filter(o=>o&&(o.name||o.offer_name||o.title));
+    all=raw.length?raw.map(norm):mocks();
+  }catch(_){all=mocks()}
+
+  buildFilters();
+  applyFilter();
+  setupBonus();
+}
+
+/* ═══════════════════════
+   NORMALISE
+═══════════════════════ */
+function norm(o){
+  return{
+    name:       String(o.name||o.offer_name||o.title||'Unnamed App').trim(),
+    description:String(o.description||o.desc||o.short_description||'Discover and test this app to earn XP.').trim(),
+    payout:     parseFloat(o.payout||o.revenue||o.amount||o.epc||0),
+    category:   String(o.categories||o.category||o.vertical||'App').trim(),
+    tracking_url:String(o.tracking_url||o.link||o.offer_url||o.url||'#').trim(),
+  };
+}
+
+function mocks(){
+  return[
+    {name:'SecureVPN Pro',        description:'Military-grade VPN with blazing speeds across 50+ countries.',        payout:2.5, category:'VPN',       tracking_url:'#'},
+    {name:'CashBack Wallet',      description:'Shop smarter and earn instant cashback on every online purchase.',     payout:3.0, category:'Finance',   tracking_url:'#'},
+    {name:'FitTrack AI Coach',    description:'AI-powered fitness and nutrition tracker built for real results.',     payout:1.8, category:'Health',    tracking_url:'#'},
+    {name:'CloudStore 5GB Free',  description:'Secure cloud storage with real-time collaboration features.',          payout:1.5, category:'Utilities', tracking_url:'#'},
+    {name:'LearnFast Academy',    description:'Master new skills with bite-sized micro-courses by top instructors.',  payout:2.2, category:'Education', tracking_url:'#'},
+    {name:'TravelDeal Finder',    description:'Discover hidden flight and hotel deals up to 70% off instantly.',     payout:4.0, category:'Travel',    tracking_url:'#'},
+    {name:'CryptoAlert Pro',      description:'Real-time crypto alerts and portfolio tracker in one sleek app.',      payout:3.5, category:'Crypto',    tracking_url:'#'},
+    {name:'ShopSavvy Rewards',    description:'Scan any barcode and find the best price anywhere in seconds.',       payout:1.2, category:'Shopping',  tracking_url:'#'},
+    {name:'MindfulMe',            description:'Daily guided meditations and sleep sounds for a calmer mind.',        payout:1.7, category:'Lifestyle', tracking_url:'#'},
+    {name:'GameQuest Beta',       description:'Play-test the hottest upcoming mobile games before anyone else.',      payout:2.8, category:'Gaming',    tracking_url:'#'},
+    {name:'SurveyPulse',          description:'Share your opinion in quick surveys and earn instant rewards.',        payout:0.9, category:'Surveys',   tracking_url:'#'},
+    {name:'DateSmart',            description:'Smart matchmaking based on real compatibility scores, not swiping.',   payout:5.0, category:'Dating',    tracking_url:'#'},
+    {name:'BudgetBuddy',          description:'Track spending, set goals, and crush your finances with ease.',        payout:2.0, category:'Finance',   tracking_url:'#'},
+    {name:'PixelCam Pro',         description:'Professional-grade photo editing on your phone with AI tools.',       payout:1.3, category:'Utilities', tracking_url:'#'},
+    {name:'LinguaLeap',           description:'Learn any language in 10 minutes a day with AI-powered lessons.',     payout:2.6, category:'Education', tracking_url:'#'},
+    {name:'NightOwl VPN',         description:'Zero-log VPN with built-in ad-blocking and tracker protection.',      payout:3.2, category:'VPN',       tracking_url:'#'},
+  ];
+}
+
+/* ═══════════════════════
+   10. SKELETON
+═══════════════════════ */
+function showSkel(){
+  el('skel-grid').classList.remove('hidden');
+  el('offers-grid').classList.add('hidden');
+  el('err-st').classList.add('hidden');
+  el('lm-wrap').classList.add('hidden');
+}
+function hideSkel(){
+  el('skel-grid').classList.add('hidden');
+  el('offers-grid').classList.remove('hidden');
+}
+
+/* ═══════════════════════
+   FILTERS
+═══════════════════════ */
+function buildFilters(){
+  const cats=new Set();
+  all.forEach(o=>{const c=o.category.split(/[,|\/]/)[0].trim();if(c)cats.add(c)});
+  const bar=el('fbar');
+  bar.innerHTML='<button class="flt active" data-cat="all">All Tasks</button>';
+  [...cats].slice(0,9).forEach(c=>{
+    const b=document.createElement('button');
+    b.className='flt';b.dataset.cat=c.toLowerCase();b.textContent=c;
+    bar.appendChild(b);
+  });
+  bar.addEventListener('click',e=>{
+    const b=e.target.closest('.flt');if(!b)return;
+    bar.querySelectorAll('.flt').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');filter=b.dataset.cat;applyFilter();
+  });
+}
+
+function applyFilter(){
+  filtered=filter==='all'?[...all]:all.filter(o=>o.category.toLowerCase().includes(filter));
+  shown=0;hideSkel();el('offers-grid').innerHTML='';
+  renderBatch();
+}
+
+/* ═══════════════════════
+   9. LAZY LOAD RENDER
+═══════════════════════ */
+function renderBatch(){
+  const grid=el('offers-grid');
+  const slice=filtered.slice(shown,shown+PS);
+  if(!slice.length&&!shown){
+    grid.innerHTML='<p style="color:var(--t2);text-align:center;padding:40px;grid-column:1/-1">No tasks in this category right now.</p>';
+    el('lm-wrap').classList.add('hidden');return;
+  }
+  const frag=document.createDocumentFragment();
+  slice.forEach((o,i)=>frag.appendChild(buildCard(o,shown+i)));
+  grid.appendChild(frag);
+  shown+=slice.length;
+  el('lm-wrap').classList.toggle('hidden',shown>=filtered.length);
+}
+
+el('btn-lm').addEventListener('click',renderBatch);
+
+/* ═══════════════════════
+   CARD BUILDER (DOM API — no innerHTML for content)
+═══════════════════════ */
+function buildCard(o,idx){
+  const xp   = xpFor(o.payout);
+  const icon = catIc(o.category);
+  const grad = catGr(o.name);
+  const cat  = o.category.split(/[,|\/]/)[0].trim()||'App';
+  const desc = o.description.length>82?o.description.slice(0,82)+'…':o.description;
+  const d    = diff(o.name);
+  const cr   = comp(o.name);
+
+  const card = mk('div','card');
+  card.style.animationDelay=Math.min(idx%PS*.055,.6)+'s';
+
+  /* header */
+  const hdr=mk('div','c-hdr');
+  const ic=mk('div','c-icon');ic.style.background=grad;ic.textContent=icon;
+  const tw=mk('div');
+  const nm=mk('div','c-name');nm.textContent=o.name;
+  const ct=mk('span','c-cat');ct.textContent=cat;
+  tw.append(nm,ct);hdr.append(ic,tw);
+
+  /* desc */
+  const ds=mk('p','c-desc');ds.textContent=desc;
+
+  /* indicators */
+  const inds=mk('div','c-inds');
+  const db=mk('span',`ind ${d.c}`);db.textContent='⚡ '+d.l;
+  const cb=mk('span','ind cr');cb.textContent=`✅ ${cr}% completion`;
+  inds.append(db,cb);
+
+  /* meta */
+  const meta=mk('div','c-meta');
+  const tm=mk('div','c-time');tm.textContent='⏱ 2–5 min';
+  const xpb=mk('div','c-xp');xpb.textContent=`⭐ +${xp} XP`;
+  meta.append(tm,xpb);
+
+  /* btn */
+  const btn=mk('button','btn-try');btn.textContent='Try App →';
+
+  card.append(hdr,ds,inds,meta,btn);
+  card.addEventListener('click',()=>openOffer(o));
+  return card;
+}
+
+/* ═══════════════════════
+   BONUS
+═══════════════════════ */
+function setupBonus(){
+  if(!all.length)return;
+  const o=all[Math.floor(Math.random()*Math.min(6,all.length))];
+  const xp=xpFor(o.payout);
+  el('b-desc').textContent=o.description.slice(0,115)+(o.description.length>115?'…':'');
+  el('b-pts').textContent='+'+xp+' XP';
+  el('b-btn').onclick=()=>openOffer(o);
+}
+
+/* ═══════════════════════
+   3+4. OFFER MODAL — delayed redirect
+═══════════════════════ */
+function openOffer(o){
+  if(!unlocked){showEmail();return}
+  const xp=xpFor(o.payout);
+  const btn=el('btn-start');
+  el('om-ic').textContent=catIc(o.category);
+  el('om-ic').style.background=catGr(o.name);
+  el('om-nm').textContent=o.name;
+  el('om-xp').textContent='⭐ +'+xp+' XP';
+  el('om-ds').textContent=o.description;
+  curUrl=o.tracking_url;
+  btn.classList.remove('loading');btn.disabled=false;
+  el('offer-overlay').classList.add('on');
+}
+function closeOffer(){el('offer-overlay').classList.remove('on')}
+el('offer-overlay').addEventListener('click',e=>{if(e.target===el('offer-overlay'))closeOffer()});
+
+/* Start Testing — 800–2000ms delay before redirect */
+el('btn-start').addEventListener('click',function(){
+  if(this.classList.contains('loading'))return;
+  this.classList.add('loading');this.disabled=true;
+  setTimeout(()=>{
+    window.open(curUrl,'_blank');
+    closeOffer();
+    this.classList.remove('loading');this.disabled=false;
+  },800+Math.random()*1200);
+});
+
+/* ═══════════════════════
+   8. EMAIL GATE
+═══════════════════════ */
+function showEmail(){if(unlocked)return;el('email-overlay').classList.add('on');setTimeout(()=>el('em-inp').focus(),270)}
+function submitEmail(){
+  const inp=el('em-inp');
+  const v=inp.value.trim();
+  if(!v||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+    inp.classList.add('err');setTimeout(()=>inp.classList.remove('err'),600);return;
+  }
+  unlocked=true;el('email-overlay').classList.remove('on');
+}
+el('em-inp').addEventListener('keydown',e=>{if(e.key==='Enter')submitEmail()});
+
+/* ═══════════════════════
+   STATS
+═══════════════════════ */
+function countTo(id,target){
+  let c=0;const step=Math.max(1,Math.ceil(target/55));
+  const t=setInterval(()=>{c=Math.min(c+step,target);el(id).textContent=c.toLocaleString();if(c>=target)clearInterval(t)},18);
+}
+function initStats(){
+  countTo('st-u',8200+rInt(3000));
+  countTo('st-r',152000+rInt(50000));
+  countTo('st-a',1200+rInt(500));
+  setInterval(()=>{
+    ['st-u','st-r','st-a'].forEach((id,i)=>{
+      const cur=parseInt(el(id).textContent.replace(/,/g,''),10);
+      el(id).textContent=(cur+(i===1?rInt(60)+10:rInt(3))).toLocaleString();
+    });
+  },4500);
+}
+
+/* ═══════════════════════
+   6. SLOT COUNTER
+═══════════════════════ */
+function initSlots(){
+  let s=35+rInt(30);el('slot-n').textContent=s;
+  const t=setInterval(()=>{
+    if(s<=5){clearInterval(t);return}
+    if(Math.random()>.44){s=Math.max(5,s-rInt(2)-1);el('slot-n').textContent=s}
+  },4700);
+}
+
+/* ═══════════════════════
+   LEADERBOARD
+═══════════════════════ */
+const LBN=['Alex','Maria','Jordan','Sam','Taylor','Riley','Casey','Morgan','Quinn','Dana'];
+const FLAGS=['🇺🇸','🇬🇧','🇨🇦','🇦🇺','🇩🇪','🇫🇷','🇧🇷','🇯🇵','🇮🇳','🇳🇱','🇸🇪','🇰🇷'];
+const lbd=LBN.map((n,i)=>({n,xp:rInt(600)+300+(10-i)*65,f:pick(FLAGS)})).sort((a,b)=>b.xp-a.xp);
+
+function renderLB(){
+  const cont=el('lb-rows');
+  const rows=[...cont.querySelectorAll('.lb-row')];
+  lbd.forEach((u,i)=>{
+    let row=rows[i];
+    if(!row){row=mk('div','lb-row');cont.appendChild(row)}
+    const rc=i===0?'rk1':i===1?'rk2':i===2?'rk3':'';
+    const md=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+    row.innerHTML=`<div class="lb-rk ${rc}">${md}</div><div class="lb-av">${u.n[0]}</div><div class="lb-nm">${u.f} ${u.n}</div><div class="lb-xp">+${u.xp.toLocaleString()} XP</div>`;
+  });
+}
+setInterval(()=>{const i=rInt(lbd.length);lbd[i].xp+=rInt(28)+8;lbd.sort((a,b)=>b.xp-a.xp);renderLB()},5500);
+
+/* ═══════════════════════
+   5. ACTIVITY FEED
+═══════════════════════ */
+const FN=['Alex','Maria','Daniel','Sophie','James','Layla','Noah','Emma','Luca','Zara','Ethan','Ava','Ryan','Chloe','Omar'];
+const FC=['USA','UK','Canada','Australia','Germany','France','Brazil','Japan','India','Sweden','Spain','Netherlands'];
+const FA=[
+  (n,c,xp)=>`<strong>${n}</strong> from ${c} completed a test <span class="act-xp">+${xp} XP</span>`,
+  (n,c,xp)=>`<strong>${n}</strong> from ${c} unlocked rewards <span class="act-xp">+${xp} XP</span>`,
+  (n,c,xp)=>`<strong>${n}</strong> from ${c} tested a new app <span class="act-xp">+${xp} XP</span>`,
+  (n,c)   =>`<strong>${n}</strong> from ${c} just joined <span class="act-xp">🎁 Bonus XP!</span>`,
+  (n,c,xp)=>`<strong>${n}</strong> from ${c} hit a streak <span class="act-xp">🔥 +${xp} XP</span>`,
+];
+const ABG=['linear-gradient(135deg,#7c3aed,#a855f7)','linear-gradient(135deg,#0891b2,#00e5ff)','linear-gradient(135deg,#059669,#10d48a)','linear-gradient(135deg,#be185d,#f43f5e)','linear-gradient(135deg,#b45309,#f59e0b)'];
+
+function spawnToast(){
+  const w=el('act-widget');
+  const n=pick(FN),c=pick(FC),xp=(rInt(22)+8)*10;
+  const toast=mk('div','act-toast');
+  toast.innerHTML=`<div class="act-av" style="background:${pick(ABG)}">${n[0]}</div><div class="act-tx">${pick(FA)(n,c,xp)}</div>`;
+  w.appendChild(toast);
+  setTimeout(()=>{toast.classList.add('out');setTimeout(()=>toast.remove(),450)},4200);
+  while(w.children.length>3)w.removeChild(w.firstChild);
+}
+
+/* ═══════════════════════
+   NAV SCROLL
+═══════════════════════ */
+window.addEventListener('scroll',()=>el('nav').classList.toggle('scrolled',scrollY>20),{passive:true});
+
+/* ═══════════════════════
+   UTILS
+═══════════════════════ */
+function el(id){return document.getElementById(id)}
+function mk(tag,cls){const e=document.createElement(tag);if(cls)e.className=cls;return e}
+function rInt(n){return Math.floor(Math.random()*n)}
+function pick(a){return a[rInt(a.length)]}
+function goto(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
+
+/* ═══════════════════════
+   INIT
+═══════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  initStats();
+  initSlots();
+  renderLB();
+  loadOffers();
+  setTimeout(showEmail,1600);
+  setTimeout(spawnToast,2300);
+  (function next(){setTimeout(()=>{spawnToast();next()},4500+rInt(3500))})();
+});
+</script>
+</body>
+</html>
